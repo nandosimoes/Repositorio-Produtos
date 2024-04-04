@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 
 public class Alimento extends Produto {
@@ -19,15 +20,12 @@ public class Alimento extends Produto {
     }
         	
     public static boolean setDataValidade(String dataValidadeString) {
-        
-        
         try {
-
-        	if (dataValidadeString.length() != 10) {
+            if (dataValidadeString.length() != 10) {
                 System.err.println("A data de validade deve ter exatamente 10 caracteres contando com as barras (yyyy-MM-dd) e a data deve ser pós 2024.");
                 return false;
             }
-        	
+            
             String dia = dataValidadeString.substring(8, 10);
             String mes = dataValidadeString.substring(5, 7);
             String ano = dataValidadeString.substring(0, 4);
@@ -36,19 +34,16 @@ public class Alimento extends Produto {
             int mesInt = Integer.parseInt(mes);
             int anoInt = Integer.parseInt(ano);
             
-            if (diaInt < 1 || diaInt > 31 || mesInt < 1 || mesInt > 12 || anoInt < 2024 ) {
-                System.err.println("Por favor, insira uma data de validade válida.");
+            if (diaInt < 1 || diaInt > 31 || mesInt < 1 || mesInt > 12 || anoInt < 2024) {
+                System.err.println("Por favor, insira uma data de validade válida (somente as datas separadas por - ");
                 return false;
             }
-           
-            return true;
             
-        } catch (NumberFormatException e) {
+            return true;
+        } catch (NumberFormatException | DateTimeParseException e) {
             System.err.println("A data de validade deve conter apenas números (yyyy-MM-dd).");
             return false;
         }
-        
-   
     }
 
     @Override
