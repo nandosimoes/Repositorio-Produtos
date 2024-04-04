@@ -1,0 +1,1 @@
+Alimento | Código: 23432 | Nome: 4234234 | Descrição: 234234 | Quantidade: 234234 | Preço: 234234.0 | Data de Validade: 2025-04-02
