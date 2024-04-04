@@ -38,7 +38,7 @@ public class Main {
                         System.out.println("Saindo do programa...");
                         break;
                     default:
-                        System.out.println("Opção inválida");
+                        System.err.println("Opção inválida");
                 }
             } catch (InputMismatchException e) {
                 System.err.println("Digite um número válido.");
