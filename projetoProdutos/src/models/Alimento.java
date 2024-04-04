@@ -35,7 +35,7 @@ public class Alimento extends Produto {
             int anoInt = Integer.parseInt(ano);
             
             if (diaInt < 1 || diaInt > 31 || mesInt < 1 || mesInt > 12 || anoInt < 2024) {
-                System.err.println("Por favor, insira uma data de validade válida (somente as datas separadas por - ");
+                System.err.println("Por favor, insira uma data de validade válida (somente as datas separadas por -).");
                 return false;
             }
             
