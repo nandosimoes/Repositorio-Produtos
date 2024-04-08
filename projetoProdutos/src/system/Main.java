@@ -15,13 +15,13 @@ public class Main {
         int opcao;
 
         do {
-            System.out.println("###########################");
+            System.out.println("---------------------------------");
             System.out.println("Gerenciamento de Estoque");
-            System.out.println("###########################");
+            System.out.println("---------------------------------");
             System.out.println("1. Criar novo produto");
             System.out.println("2. Ver produtos do estoque");
             System.out.println("3. Sair");
-            System.out.println("###########################");
+            System.out.println("---------------------------------");
 
             try {
                 opcao = scanner.nextInt();
@@ -57,14 +57,14 @@ public class Main {
 
         while (tipoProduto < 1 || tipoProduto > 3) {
             scanner = new Scanner(System.in);
-            System.out.println("###########################");
+            System.out.println("---------------------------------");
             System.out.println("Criar Novo Produto");
-            System.out.println("###########################");
+            System.out.println("---------------------------------");
             System.out.println("Selecione o tipo de produto:");
             System.out.println("1. Produto Genérico");
             System.out.println("2. Alimento");
             System.out.println("3. Eletrônico");
-            System.out.println("###########################");
+            System.out.println("---------------------------------");
             try {
                 tipoProduto = scanner.nextInt();
                 scanner.nextLine();
