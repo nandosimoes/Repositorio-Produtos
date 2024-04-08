@@ -13,92 +13,123 @@ import models.Produto;
 public class opcoesMenu {
 	 private static Scanner scanner;
 
-	public static void criarNovoProdutoGenerico() {
-	        scanner = new Scanner(System.in);
-	        System.out.println("###########################");
-	        System.out.println("Cadastrar Novo Produto Genérico");
-	        System.out.println("###########################");
-	        
-	        int codigo = Metodos.verificacao("Digite o código do produto: ");
-	        
-	        System.out.print("Digite o nome do produto: ");
-	        String nome = scanner.nextLine();
-	        
-	        System.out.print("Digite a descrição do produto: ");
-	        String descricao = scanner.nextLine();
-	        
-	        int quantidade = Metodos.verificacao("Digite a quantidade em estoque: ");
-	        
-	        int preco = Metodos.verificacao("Digite o preço: ");
-	        
-	        Produto produto = new Produto(codigo, nome, descricao, quantidade, preco);
-	        produto.gravaEstoque(codigo, nome, descricao, quantidade, preco);
-	        System.out.println("Produto criado com sucesso e gravado no estoque.");
-	    }
+	 public static void criarNovoProdutoGenerico() {
+		    scanner = new Scanner(System.in);
+		    System.out.println("---------------------------------");
+		    System.out.println("Cadastrar Novo Produto Genérico");
+		    System.out.println("---------------------------------");
+		    
+		    int codigo;
+		    boolean codigoValido = false;
+
+		    do {
+		        codigo = Metodos.verificacao("Digite o código do produto: ");
+		        if (codigoExiste(codigo)) {
+		            System.err.println("O código do produto já existe no estoque. Por favor, insira um código diferente.");
+		        } else {
+		            codigoValido = true;
+		        }
+		    } while (!codigoValido);
+
+		    System.out.print("Digite o nome do produto: ");
+		    String nome = scanner.nextLine();
+		    
+		    System.out.print("Digite a descrição do produto: ");
+		    String descricao = scanner.nextLine();
+		    
+		    int quantidade = Metodos.verificacao("Digite a quantidade em estoque: ");
+		    int preco = Metodos.verificacao("Digite o preço: ");
+		    
+		    Produto produto = new Produto(codigo, nome, descricao, quantidade, preco);
+		    produto.gravaEstoque(codigo, nome, descricao, quantidade, preco);
+		    System.out.println("Produto criado com sucesso e gravado no estoque.");
+		}
+
 	 
-	public static void criarNovoAlimento() {
-        scanner = new Scanner(System.in);
+	 public static void criarNovoAlimento() {
+		    scanner = new Scanner(System.in);
 
-        System.out.println("###########################");
-        System.out.println("Cadastrar Novo alimento");
-        System.out.println("###########################");
+		    System.out.println("---------------------------------");
+		    System.out.println("Cadastrar Novo alimento");
+		    System.out.println("---------------------------------");
 
-        int codigo = Metodos.verificacao("Digite o código do alimento: ");
+		    int codigo;
+		    boolean codigoValido = false;
 
-        System.out.print("Digite o nome do produto:");
-        String nome = scanner.nextLine();
+		    do {
+		        codigo = Metodos.verificacao("Digite o código do alimento: ");
+		        if (codigoExiste(codigo)) {
+		            System.err.println("O código do produto já existe no estoque. Por favor, insira um código diferente.");
+		        } else {
+		            codigoValido = true;
+		        }
+		    } while (!codigoValido);
 
-        System.out.print("Digite a descrição do produto:");
-        String descricao = scanner.nextLine();
+		    System.out.print("Digite o nome do produto:");
+		    String nome = scanner.nextLine();
 
-        int quantidade = Metodos.verificacao("Digite a quantidade em estoque: ");
-        double preco = Metodos.verificacao("Digite o preço do produto: ");
-        
-        String dataValidadeString = "";
-        boolean dataValida = false;
-        while (!dataValida) {
-            System.out.print("Digite a data de validade do alimento (formato: yyyy/mm/dd): ");
-            dataValidadeString = scanner.nextLine();
-            dataValida = Alimento.setDataValidade(dataValidadeString);
-            
-        }
+		    System.out.print("Digite a descrição do produto:");
+		    String descricao = scanner.nextLine();
 
-        Alimento alimento = new Alimento(codigo, nome, descricao, quantidade, preco, dataValidadeString);
-        alimento.gravaEstoque(codigo, nome, descricao, quantidade, preco, dataValidadeString);
-        System.out.println("Alimento criado com sucesso e gravado no estoque.");
-    }
+		    int quantidade = Metodos.verificacao("Digite a quantidade em estoque: ");
+		    double preco = Metodos.verificacao("Digite o preço do produto: ");
+
+		    String dataValidadeString = "";
+		    boolean dataValida = false;
+		    while (!dataValida) {
+		        System.out.print("Digite a data de validade do alimento (formato: yyyy-mm-dd): ");
+		        dataValidadeString = scanner.nextLine();
+		        dataValida = Alimento.setDataValidade(dataValidadeString);
+		    }
+
+		    Alimento alimento = new Alimento(codigo, nome, descricao, quantidade, preco, dataValidadeString);
+		    alimento.gravaEstoque(codigo, nome, descricao, quantidade, preco, dataValidadeString);
+		    System.out.println("Alimento criado com sucesso e gravado no estoque.");
+		}
+
 
 	  
-	  public static void criarNovoEletronico() {
-	        scanner = new Scanner(System.in);
-	        System.out.println("###########################");
-	        System.out.println("Cadastrar Novo eletronico");
-	        System.out.println("###########################");
-	        
-	        int codigo = Metodos.verificacao("Digite o código do produto: ");
-	        
-	        System.out.print("Digite o nome do produto:");
-	        String nome = scanner.nextLine();
-	        
-	        System.out.print("Digite a descrição do produto:");
-	        String descricao = scanner.nextLine();
-	        
-	        int quantidade = Metodos.verificacao("Digite a quantidade em estoque: ");
-	        int preco = Metodos.verificacao("Digite o preco: ");
-	        
-	        System.out.print("Digite a marca do eletrônico: ");
-	        String marca = scanner.nextLine();
-	        
-	        System.out.print("Digite o modelo do eletrônico: ");
-	        String modelo = scanner.nextLine();
+	 public static void criarNovoEletronico() {
+		    scanner = new Scanner(System.in);
+		    System.out.println("---------------------------------");
+		    System.out.println("Cadastrar Novo eletronico");
+		    System.out.println("---------------------------------");
 
-	        Eletronico eletronico = new Eletronico(codigo, nome, descricao, quantidade, preco, marca, modelo);
-	        eletronico.gravaEstoque(codigo, nome, descricao, quantidade, preco, marca, modelo);
-	        System.out.println("Eletrônico criado com sucesso e gravado no estoque.");
-	    }
+		    int codigo;
+		    boolean codigoValido = false;
+
+		    do {
+		        codigo = Metodos.verificacao("Digite o código do produto: ");
+		        if (codigoExiste(codigo)) {
+		            System.err.println("O código do produto já existe no estoque. Por favor, insira um código diferente.");
+		        } else {
+		            codigoValido = true;
+		        }
+		    } while (!codigoValido);
+
+		    System.out.print("Digite o nome do produto:");
+		    String nome = scanner.nextLine();
+
+		    System.out.print("Digite a descrição do produto:");
+		    String descricao = scanner.nextLine();
+
+		    int quantidade = Metodos.verificacao("Digite a quantidade em estoque: ");
+		    int preco = Metodos.verificacao("Digite o preco: ");
+
+		    System.out.print("Digite a marca do eletrônico: ");
+		    String marca = scanner.nextLine();
+
+		    System.out.print("Digite o modelo do eletrônico: ");
+		    String modelo = scanner.nextLine();
+
+		    Eletronico eletronico = new Eletronico(codigo, nome, descricao, quantidade, preco, marca, modelo);
+		    eletronico.gravaEstoque(codigo, nome, descricao, quantidade, preco, marca, modelo);
+		    System.out.println("Eletrônico criado com sucesso e gravado no estoque.");
+		}
+
 	  
 	  	public static void lerProdutoDoEstoque() {
-		    System.out.println("### Ler Produtos do Estoque ###");
+		    System.out.println("-------------------------------- Ler Produtos do Estoque --------------------------------");
 		    File file = new File("estoque.txt");
 
 		    try (FileReader fr = new FileReader(file);
@@ -114,6 +145,22 @@ public class opcoesMenu {
 		    }
 		}
 	  	
+	  	public static boolean codigoExiste(int codigo) {
+	  	    File file = new File("estoque.txt");
+	  	    try (FileReader fr = new FileReader(file);
+	  	         BufferedReader br = new BufferedReader(fr)) {
+	  	        String line;
+	  	        while ((line = br.readLine()) != null) {
+	  	            if (line.contains("Código: " + codigo)) {
+	  	                return true;
+	  	            }
+	  	        }
+	  	    } catch (IOException e) {
+	  	        System.out.println("Erro ao verificar o código no estoque: " + e.getMessage());
+	  	    }
+	  	    return false;
+	  	}
+
 	  	
 
 
